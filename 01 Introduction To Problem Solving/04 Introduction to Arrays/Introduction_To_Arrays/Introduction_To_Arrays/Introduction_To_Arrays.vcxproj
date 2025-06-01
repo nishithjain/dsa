@@ -132,10 +132,18 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Question01.cpp" />
+    <ClCompile Include="Question02.cpp" />
+    <ClCompile Include="Question03.cpp" />
+    <ClCompile Include="Question04.cpp" />
+    <ClCompile Include="Question05.cpp" />
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Question03.h" />
     <ClInclude Include="Question01.h" />
+    <ClInclude Include="Question02.h" />
+    <ClInclude Include="Question04.h" />
+    <ClInclude Include="Question05.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -52,7 +52,8 @@ bool isPrimeOptimized(long long int n) {
    if (n <= 3) return true;
    if (n % 2 == 0 || n % 3 == 0) return false;
    for (long long int i = 5; i * i <= n; i += 6) {
-      if (n % i == 0 || n % (i + 2) == 0) return false;
+      if (n % i == 0 || n % (i + 2) == 0) 
+         return false;
    }
    return true;
 }
@@ -83,7 +84,7 @@ long long int floorOfSqrt(long long int n) {
 
 int main()
 {
-   long long number_to_test = 1000000002LL;
+   long long number_to_test = 10'000'000'000LL;
    auto start_time = chrono::high_resolution_clock::now();
    int factor_count = countFactorsNaiveApproach(number_to_test);
    auto end_time = chrono::high_resolution_clock::now();
