@@ -127,7 +127,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="CountFactors.cpp" />
+    <ClCompile Include="Prime.cpp" />
     <ClCompile Include="Source.cpp" />
+    <ClCompile Include="SquareRoot.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="CountFactors.h" />
+    <ClInclude Include="Prime.h" />
+    <ClInclude Include="SquareRoot.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
