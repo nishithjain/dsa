@@ -83,4 +83,64 @@ int main()
       PrintMatrix(matrix);
       cout << "----------------------------------------\n";
    }
+
+   {
+      const std::vector<std::vector<int>> matrix = {
+           {11, 32, 43, 75, -4, 55},
+           {-7, 77, 22, 39, 16, -9},
+           {65, 31, 66, 40, -7, 67},
+           {47, 12, -3, -6, 30, 80},
+           {97, 87, 12, -2, -4, 39},
+           {-5, 99, 43, 12, 10, 34}
+      };
+
+      PrintMatrix(matrix);
+      cout << "Boundary Elements of Square Matrix: \n";
+      PrintBoundaryClockwiseSquareMatrix(matrix);
+      cout << "----------------------------------------\n";
+   }
+
+   {
+      const std::vector<std::vector<int>> matrix = {
+           {11, 32, 43, 75, -4},
+           {-7, 77, 22, 39, 16},
+           {65, 31, 66, 40, -7},
+           {47, 12, -3, -6, 30},
+           {97, 87, 12, -2, -4},
+           {-5, 99, 43, 12, 10}
+      };
+
+      PrintMatrix(matrix);
+      cout << "Boundary Elements of NxM Matrix: \n";
+      PrintBoundaryClockwise(matrix);
+      cout << "----------------------------------------\n";
+   }
+
+   {
+      const std::vector<std::vector<int>> matrix1 = {
+           {11, 32, 43, 75, -4, 55},
+           {-7, 77, 22, 39, 16, -9},
+           {65, 31, 66, 40, -7, 67},
+           {47, 12, -3, -6, 30, 80},
+           {97, 87, 12, -2, -4, 39},
+           {-5, 99, 43, 12, 10, 34}
+      };
+
+      PrintMatrix(matrix1);
+      cout << "Printing Spirally Square Matrix(Even Size) : \n";
+      PrintSpiral(matrix1);
+      cout << "----------------------------------------\n";
+      const std::vector<std::vector<int>> matrix2 = {
+           {11, 32, 43, 75, -4},
+           {-7, 77, 22, 39, 16},
+           {65, 31, 66, 40, -7},
+           {47, 12, -3, -6, 30},
+           {97, 87, 12, -2, -4},
+      };
+
+      PrintMatrix(matrix2);
+      cout << "Printing Spirally Square Matrix(Odd Size) : \n";
+      PrintSpiral(matrix2);
+      cout << "----------------------------------------\n";
+   }
 }

@@ -17,3 +17,7 @@ void FindTransposeOfSquareMatrixInPlace(
 
 void ReverseArray(std::vector<int>& vec);
 void RotateMatrixBy90Degree(std::vector<std::vector<int>>& matrix);
+
+void PrintBoundaryClockwiseSquareMatrix(const std::vector<std::vector<int>>& matrix);
+void PrintBoundaryClockwise(const std::vector<std::vector<int>>& matrix);
+void PrintSpiral(const std::vector<std::vector<int>>& matrix);

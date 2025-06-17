@@ -175,13 +175,13 @@ vector<vector<int>> FindTransposeOfMatrix(const vector<vector<int>>& matrix)
 i=0   |  -  |  -  |  -  |  -  |  -  |  -  |
       +-----+-----+-----+-----+-----+-----+
 i=1   |  *  |  -  |  -  |  -  |  -  |  -  |  <- swap [1][0] with [0][1]
-      +-----+-----+-----+-----+-----+-----+  
+      +-----+-----+-----+-----+-----+-----+
 i=2   |  *  |  *  |  -  |  -  |  -  |  -  |  <- [2][0], [2][1]
-      +-----+-----+-----+-----+-----+-----+  
+      +-----+-----+-----+-----+-----+-----+
 i=3   |  *  |  *  |  *  |  -  |  -  |  -  |  <- [3][0], [3][1], [3][2]
-      +-----+-----+-----+-----+-----+-----+  
+      +-----+-----+-----+-----+-----+-----+
 i=4   |  *  |  *  |  *  |  *  |  -  |  -  |  <- [4][0] ... [4][3]
-      +-----+-----+-----+-----+-----+-----+  
+      +-----+-----+-----+-----+-----+-----+
 i=5   |  *  |  *  |  *  |  *  |  *  |  -  |  <- [5][0] ... [5][4]
       +-----+-----+-----+-----+-----+-----+
  */
@@ -230,4 +230,145 @@ void RotateMatrixBy90Degree(std::vector<std::vector<int>>& matrix)
    FindTransposeOfSquareMatrixInPlace(matrix);
    for (auto& i : matrix)
       ReverseArray(i);
+}
+
+/*
+         j=0      j=1      j=2      j=3      j=4      j=5
+      +--------+--------+--------+--------+--------+--------+
+i=0   |  * 11  | * 32   |  * 43  |  * 75  |  * -4  |  * 55  |
+      +--------+--------+--------+--------+--------+--------+
+i=1   |  * -7  |   77   |   22   |   39   |   16   |  * -9  |
+      +--------+--------+--------+--------+--------+--------+
+i=2   |  * 65  |   31   |   66   |   40   |  -7    |  * 67  |
+      +--------+--------+--------+--------+--------+--------+
+i=3   |  * 47  |   12   |  -3    |  -6    |  30    |  * 80  |
+      +--------+--------+--------+--------+--------+--------+
+i=4   |  * 97  |   87   |  12    |  -2    |  -4    |  * 39  |
+      +--------+--------+--------+--------+--------+--------+
+i=5   |  * -5  |  * 99  |  * 43  |  * 12  |  * 10  |  * 34  |
+      +--------+--------+--------+--------+--------+--------+
+      * elements are boundary elements.
+      *
+      *Steps:
+      * 1. Print N-1 elements to right.
+      * 2. Print N-1 elements to down.
+      * 3. Print N-1 elements to left.
+      * 4. Print N-1 elements to top.
+ */
+void PrintBoundaryClockwiseSquareMatrix(const std::vector<std::vector<int>>& matrix)
+{
+   const int n = static_cast<int>(matrix.size());
+   int i = 0, j = 0;
+   // Number of elements [1, n-1] = r - l + 1
+   // = n - 1 - 1 + 1 = n - 1 elements.
+   for (int k = 1; k <= n - 1; k++)
+   {
+      cout << matrix[i][j] << " ";
+      j++;
+   } //  End of the loop i = 0 and j = n - 1 = 5
+
+   for (int k = 1; k <= n - 1; k++)
+   {
+      cout << matrix[i][j] << " ";
+      i++;
+   } //  End of the loop i = n - 1 = 5  and j = n - 1 = 5
+
+   for (int k = 1; k <= n - 1; k++)
+   {
+      cout << matrix[i][j] << " ";
+      j--;
+   } //  End of the loop i = n - 1  and j = 0
+
+   for (int k = 1; k <= n - 1; k++)
+   {
+      cout << matrix[i][j] << " ";
+      i--;
+   } //  End of the loop i = 0  and j = 0
+   cout << '\n';
+}
+
+void PrintBoundaryClockwise(const std::vector<std::vector<int>>& matrix)
+{
+   const int rows = static_cast<int>(matrix.size());
+   if (rows == 0) return;
+
+   const int cols = static_cast<int>(matrix[0].size());
+   if (cols == 0) return;
+
+   // Top row (left to right)
+   for (int j = 0; j < cols; ++j)
+      cout << matrix[0][j] << " ";
+
+   // Right column (top to bottom), skip top cell
+   for (int i = 1; i < rows; ++i)
+      cout << matrix[i][cols - 1] << " ";
+
+   // Bottom row (right to left), skip bottom-right if more than 1 row
+   if (rows > 1) {
+      for (int j = cols - 2; j >= 0; --j)
+         cout << matrix[rows - 1][j] << " ";
+   }
+
+   // Left column (bottom to top), skip bottom-left and top-left if more than 1 col
+   if (cols > 1) {
+      for (int i = rows - 2; i > 0; --i)
+         cout << matrix[i][0] << " ";
+   }
+
+   cout << '\n';
+}
+
+/*
+          j=0     j=1     j=2     j=3     j=4     j=5
+      +-------+-------+-------+-------+-------+-------+
+i=0   |   -   |   -   |   -   |   -   |   ->  |   |   |
+      +-------+-------+-------+-------+-------+-------+
+i=1   |   -   |   -   |   -   |  ->   |   |   |   |   |
+      +-------+-------+-------+-------+-------+-------+
+i=2   |   ^   |   -   |  ->   |   v   |   |   |   |   |
+      +-------+-------+-------+-------+-------+-------+
+i=3   |   |   |   ^   |   *   |  <-   |   v   |   |   |
+      +-------+-------+-------+-------+-------+-------+
+i=4   |   |   |   |   |  <-   |   -   |   -   |   v   |
+      +-------+-------+-------+-------+-------+-------+
+i=5   |   |   |  <-   |   -   |   -   |   -   |   -   |
+      +-------+-------+-------+-------+-------+-------+
+ */
+void PrintSpiral(const std::vector<std::vector<int>>& matrix)
+{
+   int i = 0, j = 0;
+   int n = static_cast<int>(matrix.size());
+
+   while (n > 1)
+   {
+      for (int k = 1; k <= n - 1; k++)
+      {
+         cout << matrix[i][j] << " ";
+         j++;
+      } 
+
+      for (int k = 1; k <= n - 1; k++)
+      {
+         cout << matrix[i][j] << " ";
+         i++;
+      } 
+
+      for (int k = 1; k <= n - 1; k++)
+      {
+         cout << matrix[i][j] << " ";
+         j--;
+      } 
+
+      for (int k = 1; k <= n - 1; k++)
+      {
+         cout << matrix[i][j] << " ";
+         i--;
+      }
+      n = n - 2;
+      i++; j++;
+   }
+   if (n == 1)
+      cout<< matrix[i][j] << " ";
+
+   cout << '\n';
 }
